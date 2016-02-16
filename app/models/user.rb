@@ -4,11 +4,13 @@ class User < ActiveRecord::Base
                     :url => "/system/:attachment/:id/:basename_:style.:extension",
                     :styles => {
                       :original => [:format => :jpg, :quality => 70],
-                      :mysingle => ['200x300', :jpg, :quality => 70] 
+                      :mysingle => ['492x610!', :jpg, :quality => 100],
+                      :crop => ['492x610#', :jpg, :quality =>100]
                     },
                     :convert_options => {
                       :original => '-set colorspacesRGB -strip',
-                      :mysingle => '-set colorspacesRGB -strip'
+                      :mysingle => '-set colorspacesRGB -strip -sharpen 0x0.5 ',
+                      :crop => '-set colorspacesRGB -strip -sharpen 0x0.5'
                     }
   validates_attachment :photo,
                        :presence => true,

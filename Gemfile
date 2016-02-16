@@ -26,6 +26,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Paperclip for image upload and modification
 gem 'paperclip', :git => 'https://github.com/thoughtbot/paperclip.git'
 
+# Jcrop for image crop
+gem 'jcrop-rails-v2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
