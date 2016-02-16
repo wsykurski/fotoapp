@@ -11,8 +11,14 @@
 </p>
 
 <p>
-  <strong>Mysingle:</strong>
-  <%= @user.photo.url(:original) %>
+  <strong>Original:</strong>
+  <%= image_tag @user.photo.url(:original) %>
+</p>
+
+
+<p>
+  <strong>300x400:</strong>
+  <%= image_tag @user.photo.url(:mysingle) %>
 </p>
 <br/>
 <%= link_to 'Edit', edit_user_path(@user) %> |
