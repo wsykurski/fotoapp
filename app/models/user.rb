@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
                       :mysingle => '-set colorspacesRGB -strip -sharpen 0x0.5 ',
                       :crop => '-set colorspacesRGB -strip -sharpen 0x0.5'
                     }
+  crop_attached_file :photo, :aspect => "492:610"
   validates_attachment :photo,
                        :presence => true,
                        :size => { :in => 0..10.megabytes },
