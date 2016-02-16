@@ -10,5 +10,10 @@
   <%= @user.mysingle_id %>
 </p>
 
+<p>
+  <strong>Mysingle:</strong>
+  <%= @user.photo.url(:original) %>
+</p>
+<br/>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
