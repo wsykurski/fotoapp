@@ -11,13 +11,21 @@ class User < ActiveRecord::Base
                       :original => '-set colorspacesRGB -strip',
                       :mysingle => '-set colorspacesRGB -strip -sharpen 0x0.5 ',
                       :crop => '-set colorspacesRGB -strip -sharpen 0x0.5'
-                    }
-  crop_attached_file :photo, :aspect => "492:610"
+                    },
+                    :processors => [:cropper]
   validates_attachment :photo,
                        :presence => true,
                        :size => { :in => 0..10.megabytes },
                        :content_type => { :content_type => /^image\/(jpeg|png|gif|tiff)$/}
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+
+  def cropping?
+    !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+  end
+
+  def reprocess_avatar
+    image.reprocess!
+  end
 
   def avatar_geometry(style = :original)
     @geometry ||= {}
