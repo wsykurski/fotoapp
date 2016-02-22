@@ -17,4 +17,11 @@ class User < ActiveRecord::Base
                        :presence => true,
                        :size => { :in => 0..10.megabytes },
                        :content_type => { :content_type => /^image\/(jpeg|png|gif|tiff)$/}
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+
+  def avatar_geometry(style = :original)
+    @geometry ||= {}
+    @geometry[style] ||= Paperclip::Geometry.from_file(photo.path(style))
+  end
+
 end

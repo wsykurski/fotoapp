@@ -19,11 +19,38 @@
     <%= f.label :mysingle_id %><br>
     <%= f.text_field :mysingle_id %>
   </div>
-  <div .noDrag>
-      <%= f.label :photo %>
-      <%= f.cropbox :photo %>
+
+  <div>
+      <%= image_tag @user.photo.url(:original), :id => "cropbox" %>
+      <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+          <%= f.text_field attribute, :id => attribute %>
+      <% end %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<script>
+$(function() {
+  $('#cropbox').Jcrop({
+    onChange: update_crop,
+    onSelect: update_crop,
+    allowResize: false,
+    allowSelect: false,
+    animateTo: [0, 0, 492, 610],
+    setSelect: [0, 0, 492, 610],
+    aspectRatio: 492/610
+  });
+});
+
+function update_crop(coords) {
+  var ratio = <%= @user.avatar_geometry(:original).width %> / <%= @user.avatar_geometry(:mysingle).width %>; 
+  $('#crop_x').val(Math.floor(coords.x * ratio));
+  $('#crop_y').val(Math.floor(coords.y * ratio));
+  $('#crop_w').val(Math.floor(coords.w * ratio));
+  $('#crop_h').val(Math.floor(coords.h * ratio));  
+}
+
+</script>
