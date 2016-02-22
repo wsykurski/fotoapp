@@ -15,17 +15,14 @@
   <%= image_tag @user.photo.url(:original) %>
 </p>
 
-
 <p>
-  <strong>200x200:</strong>
+  <strong>Mysingle:</strong>
   <%= image_tag @user.photo.url(:mysingle) %>
 </p>
 
 
-<p>
-  <strong>Crop:</strong>
-  <%= image_tag @user.photo.url(:crop) %>
-</p>
+
+
 <br/>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
